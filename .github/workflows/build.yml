@@ -1,7 +1,6 @@
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-
   matrix:
     runs-on: ubuntu-22.04
     name: Fetch Build Keyboards
@@ -23,8 +22,7 @@ jobs:
       - name: Validate JSON
         run: |
           echo "${{ env.build_matrix }}" | jq . || exit 1
-  build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+
     runs-on: ubuntu-latest
     container:
       image: zmkfirmware/zmk-build-arm:stable
@@ -37,3 +35,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       # Other steps remain the same...
+  build:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+ 
